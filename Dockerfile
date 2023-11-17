@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # First update and required packages
 RUN apt-get update && \
-    apt-get install -y openssh-server git curl software-properties-common ca-certificates gnupg sudo vim
+    apt-get install -y openssh-server git curl software-properties-common ca-certificates gnupg sudo vim net-tools
 
 RUN systemctl enable ssh.service
 
@@ -18,7 +18,7 @@ RUN useradd -m -d /home/dev -s /bin/bash dev && \
 RUN echo 'dev ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/dev && \
     chmod 440 /etc/sudoers.d/dev
 
-RUN echo "ssh-public-key" > /home/dev/.ssh/authorized_keys
+RUN echo "public-key" > /home/dev/.ssh/authorized_keys
 
 RUN chmod 600 /home/dev/.ssh/authorized_keys && \
     chown -R dev:dev /home/dev/.ssh
