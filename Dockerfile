@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # First update and required packages
 RUN apt-get update && \
-    apt-get install -y openssh-server git curl software-properties-common ca-certificates gnupg sudo
+    apt-get install -y openssh-server git curl software-properties-common ca-certificates gnupg sudo vim
 
 RUN systemctl enable ssh.service
 
@@ -26,7 +26,7 @@ RUN chmod 600 /home/dev/.ssh/authorized_keys && \
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-EXPOSE 22 80 443 2358
+EXPOSE 22 80 443
 
 CMD ["/usr/sbin/sshd", "-D"]
 
